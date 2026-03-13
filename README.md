@@ -1,9 +1,9 @@
 # **Study Session Tracker**
 
 ## **Description**
-### I built a small study session tracker web-app that uses a SQLite data that stores, retrieves, updates, and deletes data with the help of Claude AI. 
+I built a small study session tracker web-app that uses SQLite data that stores, retrieves, updates, and deletes data with the help of AI tools. 
 
-### I want to become more efficient with studying as semester progresses, so keeping tracker can help me analyze myself and better my time management.
+I want to become more efficient with studying as the semester progresses, so keeping a tracker can help me analyze myself and better my time management.
 
 ### Features of Table:
 - id (automated integer)
