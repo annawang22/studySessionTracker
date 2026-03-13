@@ -1,0 +1,144 @@
+AI Models/tools used: Claude AI (March 2026 version) and ChatGPT Pro (March 2026 version)
+
+ChatGPT Pro Prompts:
+i am thinking of building a small app that uses a SQLite database to store, retrieve, update, and delete data. my idea is a study session tracker what are some piece of information that i should consider for each entry. do you think that having the id be the date is a good idea?
+
+i want to set up my project and create the database. i know i have to use python's built0-in sqlite3 module but could you explain to me the steps i should follow to first create the database. this includes creating a database file, my own table. then could you tell me how i should run my script. should this be in the command line? and how do i verify the table was created correctly? what should i predict to see?
+
+does this mean i have to download python from the browser? "Python was not found; run without arguments to install from the Microsoft Store, or disable this shortcut from Settings > Apps > Advanced app settings > App execution aliases."
+
+Claude AI Prompts:
+im trying to build a study session tracker in sql. im on the preliminary steps of building the database still. im getting stuck on how to run my code so i can verify that the .db file is created.
+
+i ran this in my terminal and i received an error that says: "sqlite3 : The term 'sqlite3' is not 
+recognized as the name of a cmdlet, 
+function, script file, or operable 
+program. Check the spelling of the 
+name, or if a path was included, 
+verify that the path is correct and 
+try again.
+At line:1 char:1
++ sqlite3 study_sessions.db
++ ~~~~~~~
+    + CategoryInfo          : Object 
+   NotFound: (sqlite3:String) [], C  
+  ommandNotFoundException
+    + FullyQualifiedErrorId : Comman  
+   dNotFoundException"
+
+am i supposed to get [('sessions',), ('sqlite_sequence',)]
+
+show me how to write a python function that asks the user for the date, duration, subject, task_type, and focus_rating and inserts a new row into my study_sessions table using sqlite. use parameterized queries to avoid SQL injection.
+
+why do i return conn
+
+what does that mean to return conn
+
+so is cursor like allows for user input and then connection is like connecting the user input to the table?
+
+why did we split into two function? what does each function do? does init_db make the database and then log_session allows for whatever the user inputed to be transferred to the database?
+
+i ran "python -c "import sqlite3; conn = sqlite3.connect('study_sessions.db'); print(conn.execute('SELECT * FROM sessions').fetchall())"" and all i got back was "[]" where am i supposed to see this table for me to input things
+
+wait so what did i just run and what did it do
+
+now i want to implement update and delete in which i have update which i let the user pick a reocrd and change one or more of its fields and then delete which removes a record and prompts a confirmation question of "are you sure". i want to make sure that i show the user the record their about to modify or delete so they are sure they selected the right one. guide me through the steps for this.
+
+Claude asked me: 1. For update, do you want the user to be able to change multiple fields in one go, or is changing one field at a time okay for now?
+2. For the menu, do you want it to loop (so they can log multiple sessions in one run) or is one action per run fine for now?
+
+My response: 1. multiple fields in one go 2. loop
+
+Claude asked me: Before we write any of it, one thing worth thinking about — right now your script doesn't have a way to show the user all their sessions so they know which ID to pick when updating or deleting. We have two options:
+Option A: Add a "view all sessions" menu option that lists every record with its ID
+Option B: Just show the ID prompt and let the user remember/guess their IDs
+Option A is almost always necessary in practice — otherwise the user has no way of knowing what IDs exist. Would you like to add that as a 4th menu option (making quit option 5), or would you rather keep it simple for now?
+
+My response: option A
+
+ready to start with view_sessions()
+
+what does "'SELECT * FROM sessions'" mean
+
+do i place view_sessions before the last three lines of my current code
+
+lets move on to get_record()
+
+explain this "WHERE id = ?', (session_id,)"
+
+ready to move on to update_sessions
+
+what does enumerate do here: "for i, field in enumerate(fields, start=1):
+        print(f"{i}. {field}")"
+
+im ready for delete_session()
+
+wait so when i run python tracker.py it asks me to log another session and i don't get the menu
+
+ready to replace log_session(conn)
+
+i forgot that before implement update and delete, i wanted to implement a read. i know that i have a way of showing all entries. i want to also add a way to filter by subject. could you take me through the steps for doing this?
+
+Claude asked me: One question before we start: do you want the filter to be exact match (user must type "Math" exactly as it was entered), or partial match (typing "mat" would also find "Math")?
+Partial match is more user-friendly but slightly more complex. What do you prefer?
+
+My response: exact match
+
+im ready to add the menu option
+
+i didn't have a gitignore for my .db file before but i just created one now, is that bad? can people see my history
+
+i feel my project is functional but very straightforward. could provide me the steps to develop a simple web interface: a flask app with HTML pages for viewing and managaing data?
+
+Claude asked me: A couple of questions before we start:
+Do you have Flask installed? You can check by running pip show flask in PowerShell.
+Are you comfortable keeping your existing tracker.py as is and building app.py separately, or would you prefer to consolidate everything into one file?
+
+My response: 1. what is the command prompt to download flask 2. i want to build app.py separately
+
+let's start app.py
+
+there's still a squiggle underneath flask when i import it even though i downlaoded it?
+
+what does this do: def get_db():
+    conn = sqlite3.connect('study_sessions.db')
+    conn.row_factory = sqlite3.Row
+    return conn?
+
+and what does render_template do
+
+what does this do: 
+```python
+if __name__ == '__main__':
+    app.run(debug=True)
+```
+
+ready to start base.html
+
+explain this "{% block content %}{% endblock %}"
+
+ready for index.html
+
+ready for add.html
+
+ready to add to app.py
+
+ready for edit.html
+
+ready to add to app.py
+
+why was ""/edit/{{ session['id'] }}">" added
+
+ready to add to app.py
+
+ready to create /delete route
+
+why don't i need a delete.html
+
+give me a rundown list of the common markdowns for writing READMEs
+
+how do i also add the filtering but subject to my user interface
+
+do i place it before the {if %sessions%}?
+
+why explain why the structure is like that

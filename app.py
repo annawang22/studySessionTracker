@@ -10,10 +10,14 @@ def get_db():
 
 @app.route('/')
 def index():
+    subject_filter = request.args.get('subject', '')
     conn = get_db()
-    sessions = conn.execute('SELECT * FROM sessions').fetchall()
+    if subject_filter:
+        sessions = conn.execute('SELECT * FROM sessions WHERE subject = ?', (subject_filter,)).fetchall()
+    else:
+        sessions = conn.execute('SELECT * FROM sessions').fetchall()
     conn.close()
-    return render_template('index.html', sessions=sessions)
+    return render_template('index.html', sessions=sessions, subject_filter=subject_filter)
 
 @app.route('/add', methods=['GET', 'POST'])
 def add_session():

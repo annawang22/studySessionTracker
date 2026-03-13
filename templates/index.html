@@ -4,6 +4,12 @@
 
     <h2>All Study Sessions</h2>
 
+    <form method="GET" action="/">
+        <input type="text" name="subject" placeholder="Filter by subject" value="{{ subject_filter }}">
+        <button type="submit">Filter</button>
+        <a href="/">Clear</a>
+    </form><br>
+
     <!-- If there are no sessions, show a message instead of an empty table -->
     {% if sessions %}
 
