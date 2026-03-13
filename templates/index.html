@@ -1,0 +1,45 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+    <h2>All Study Sessions</h2>
+
+    <!-- If there are no sessions, show a message instead of an empty table -->
+    {% if sessions %}
+
+        <table>
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Date</th>
+                    <th>Duration (hrs)</th>
+                    <th>Subject</th>
+                    <th>Task Type</th>
+                    <th>Focus Rating</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- Loop through each session and create a table row for it -->
+                {% for session in sessions %}
+                <tr>
+                    <td>{{ session['id'] }}</td>
+                    <td>{{ session['session_date'] }}</td>
+                    <td>{{ session['duration'] }}</td>
+                    <td>{{ session['subject'] }}</td>
+                    <td>{{ session['task_type'] }}</td>
+                    <td>{{ session['focus_rating'] }}/10</td>
+                    <td>
+                        <a href="/edit/{{ session['id'] }}">Edit</a>
+                        <a href="/delete/{{ session['id'] }}" onclick="return confirm('Are you sure?')">Delete</a>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+
+    {% else %}
+        <p>No sessions logged yet. <a href="/add">Log one now!</a></p>
+    {% endif %}
+
+{% endblock %}

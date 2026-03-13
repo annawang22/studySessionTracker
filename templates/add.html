@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+    <h2>Log a New Session</h2>
+
+    <form method="POST" action="/add">
+
+        <label for="session_date">Date</label><br>
+        <input type="date" id="session_date" name="session_date"><br><br>
+
+        <label for="duration">Duration (hours)</label><br>
+        <input type="number" id="duration" name="duration" step="0.5"><br><br>
+
+        <label for="subject">Subject</label><br>
+        <input type="text" id="subject" name="subject"><br><br>
+
+        <label for="task_type">Task Type</label><br>
+        <input type="text" id="task_type" name="task_type"><br><br>
+
+        <label for="focus_rating">Focus Rating (1-5)</label><br>
+        <input type="number" id="focus_rating" name="focus_rating" min="1" max="5"><br><br>
+
+        <button type="submit">Log Session</button>
+
+    </form>
+
+{% endblock %}
